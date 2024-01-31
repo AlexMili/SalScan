@@ -1,0 +1,1 @@
+::: SalScan.Model.Saliency.STSANet.STSANetwork

@@ -1,0 +1,19 @@
+# Env files
+.vscode/
+.venv/
+*.env
+
+# Python
+*.pyc
+*.egg-info
+*.whl
+.venv
+.pytest_cache
+.mypy_cache
+__pycache__/
+.ipynb_checkpoints/
+build/
+
+# Windows/MacOs file
+desktop.ini
+.DStore

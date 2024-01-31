@@ -1,0 +1,19 @@
+site_name: SalScan
+site_description: SalScan framework, easy to learn saliency evaluation and validation framework
+site_url: https://github.com/AlexMili/SalScan
+theme:
+    name: material
+plugins:
+  search: null
+  mkdocstrings:
+    handlers:
+      python:
+        options:
+          show_root_heading: true
+          show_if_no_docstring: false
+          inherited_members: true
+          members_order: source
+          separate_signature: true
+          unwrap_annotated: true
+          filters: ["!^_", "!^logger"]
+          merge_init_into_class: true

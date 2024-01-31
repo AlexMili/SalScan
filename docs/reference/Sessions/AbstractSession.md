@@ -1,0 +1,1 @@
+::: SalScan.Session.AbstractSession
