@@ -8,7 +8,7 @@ pytest==7.2.2
 # For extracting .rar files from auto download dataset feature
 patool==1.12
 # To download files from Google Drive
-gdown==4.7.1
+gdown==5.1.0
 
 # Image processing
 opencv_python==4.5.1.48
