@@ -8,8 +8,6 @@ from SalScan.Dataset.Image.CAT2000Dataset import CAT2000Dataset
 from SalScan.Dataset.Image.MIT1003Dataset import MIT1003Dataset
 
 DATASET_FOLDER = os.path.join(os.path.expanduser("~"), "datasets")
-if os.path.exists(DATASET_FOLDER) is False:
-    raise FileNotFoundError(f"Folder {DATASET_FOLDER} does not exist in your system.")
 
 
 @pytest.fixture
@@ -24,10 +22,14 @@ def temp_dir_mit():
 
 
 def test_discard_mit_training_images(temp_dir_mit):
-    # Ensure that MIT1003 is present by downloading it
-    mit1003 = MIT1003Dataset(path=os.path.join(DATASET_FOLDER, "mit1003"), download=True)
+    dirpath: str = os.path.join(DATASET_FOLDER, "mit1003")
+    if os.path.exists(dirpath) is False:
+        raise FileNotFoundError(f"Folder {dirpath} does not exist in your system.")
 
-    mit_stimuli_path = os.path.join(DATASET_FOLDER, "mit1003", "ALLSTIMULI")
+    # Ensure that MIT1003 is present by downloading it
+    mit1003 = MIT1003Dataset(path=dirpath, download=True)
+
+    mit_stimuli_path = os.path.join(dirpath, "ALLSTIMULI")
     mit_stimuli = glob.glob(os.path.join(mit_stimuli_path, "*"))
     assert len(mit_stimuli) == 1003
 
@@ -37,9 +39,7 @@ def test_discard_mit_training_images(temp_dir_mit):
             shutil.copyfile(file, os.path.join("tmp_mit_1003", os.path.basename(file)))
 
     # Initialize datasets
-    mit1003_val = MIT1003Dataset(
-        path=os.path.join(DATASET_FOLDER, "mit1003"), training_path="tmp_mit_1003"
-    )
+    mit1003_val = MIT1003Dataset(path=dirpath, training_path="tmp_mit_1003")
 
     # Populate datasets
     mit1003.populate()
@@ -64,9 +64,12 @@ def temp_dir_cat():
 
 
 def test_discard_cat_training_images(temp_dir_cat):
+    dirpath: str = os.path.join(DATASET_FOLDER, "CAT2000")
+    if os.path.exists(dirpath) is False:
+        raise FileNotFoundError(f"Folder {dirpath} does not exist in your system.")
     # Use the temp_dir from the fixture
-    cat2000 = CAT2000Dataset(path=os.path.join(DATASET_FOLDER, "cat2000"), download=True)
-    cat_stimuli_path = os.path.join(DATASET_FOLDER, "cat2000", "trainSet", "Stimuli")
+    cat2000 = CAT2000Dataset(path=dirpath, download=True)
+    cat_stimuli_path = os.path.join(dirpath, "trainSet", "Stimuli")
     cat_stimuli = glob.glob(os.path.join(cat_stimuli_path, "**", "*"))
     cat_stimuli = [stim for stim in cat_stimuli if os.path.isfile(stim)]
 
@@ -81,9 +84,7 @@ def test_discard_cat_training_images(temp_dir_cat):
 
     # Initialize datasets
 
-    cat2000_val = CAT2000Dataset(
-        path=os.path.join(DATASET_FOLDER, "cat2000"), training_path="tmp_cat_2000"
-    )
+    cat2000_val = CAT2000Dataset(path=dirpath, training_path="tmp_cat_2000")
 
     # Populate datasets
     cat2000.populate()

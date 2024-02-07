@@ -70,7 +70,6 @@ class Testing(unittest.TestCase):
             for items in tqdm(dataset):
                 video_frames = items[0]
                 self.frame_size.append(len(video_frames))
-
         except KeyError:
             self.fail("Failed test: test_seq_len_5")
 

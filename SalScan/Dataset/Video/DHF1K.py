@@ -521,9 +521,6 @@ class DHF1KDataset(VideoAbstractDataset):
         If the dataset is not present at the specified root path, this method will
         download it. Requires 'unar' installed in the system for unarchiving the dataset.
         """
-        logger.warning(
-            "\n 🔴 You need to have unar installed in your terminal (https://theunarchiver.com/command-line)"
-        )
         if os.path.isdir(self.root_path):
             logger.warning(
                 f"\n 🔴 The output directory {self.root_path} is already present on your "

@@ -29,7 +29,7 @@ def test_add_metrics_image(temp_dir):
     def new_metric(gen_saliency_map, gt_fixation_map):
         return AUC_JUDD_fast(gen_saliency_map, gt_fixation_map)
 
-    NEW_METRIC_NAME = new_metric.__name__
+    new_metric_name = new_metric.__name__
 
     model = CenterBias
     dataset = MIT1003Dataset
@@ -48,7 +48,7 @@ def test_add_metrics_image(temp_dir):
     # to add a metric among the class attribe "available metrics"
 
     ImageSaliencyEval_copy = ImageSaliencyEvaluation
-    ImageSaliencyEval_copy.available_metrics[NEW_METRIC_NAME] = 1
+    ImageSaliencyEval_copy.available_metrics[new_metric_name] = 1
 
     evaluate = ImageSaliencyEval_copy(
         evaluate_dict=image_dict,
@@ -64,7 +64,7 @@ def test_add_metrics_image(temp_dir):
     experiment_results = pd.read_csv(path_exp, usecols=["metric", "dataset"])
     print(experiment_results)  # noqa
     # checking that the new metric has been added to the resulting csv file
-    assert NEW_METRIC_NAME in experiment_results.loc[:, "metric"].tolist()
+    assert new_metric_name in experiment_results.loc[:, "metric"].tolist()
     # since the NEW_METRIC is a copy of AUC_JUDD_fast, we are asserting that
     # the results are the same as for AUC_JUDD_fast
     assert experiment_results.loc[0, "dataset"] == experiment_results.loc[1, "dataset"]
@@ -76,7 +76,7 @@ def test_add_metrics_video(temp_dir):
     def new_metric(gen_saliency_map, gt_fixation_map):
         return AUC_JUDD_fast(gen_saliency_map, gt_fixation_map)
 
-    NEW_METRIC_NAME = new_metric.__name__
+    new_metric_name = new_metric.__name__
 
     model = CenterBias
     dataset = DHF1KDataset
@@ -92,7 +92,7 @@ def test_add_metrics_video(temp_dir):
     # Store a copy of the ImageSaliencyClass in a variable
     # to add a metric among the class attribe "available metrics"
     VideoSaliencyEval_copy = VideoSaliencyEvaluation
-    VideoSaliencyEval_copy.available_metrics[NEW_METRIC_NAME] = 1
+    VideoSaliencyEval_copy.available_metrics[new_metric_name] = 1
 
     evaluate = VideoSaliencyEval_copy(
         evaluate_list=video_list,
@@ -107,7 +107,7 @@ def test_add_metrics_video(temp_dir):
     )
     experiment_results = pd.read_csv(path_exp, usecols=["metric", "dataset"])
     # checking that the new metric has been added to the resulting csv file
-    assert NEW_METRIC_NAME in experiment_results.loc[:, "metric"].tolist()
+    assert new_metric_name in experiment_results.loc[:, "metric"].tolist()
     # since the NEW_METRIC is a copy of AUC_JUDD_fast, we are asserting that
     # the results are the same as for AUC_JUDD_fast
     assert experiment_results.loc[0, "dataset"] == experiment_results.loc[1, "dataset"]
