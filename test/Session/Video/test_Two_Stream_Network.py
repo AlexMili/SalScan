@@ -3,15 +3,14 @@ import os
 # Datasets
 from SalScan.Dataset.Video.DHF1K import DHF1KDataset
 
-# Session
-from SalScan.Session.Saliency.VideoSession import VideoSaliencySession
-
 # Models
 from SalScan.Model.Saliency.Two_Stream_Network import Two_Stream_Network
 
-# data augumentation (per eval)
-from SalScan.Transforms import Padding, padding_fixation
+# Session
+from SalScan.Session.Saliency.VideoSession import VideoSaliencySession
 
+# Data augumentation (per eval)
+from SalScan.Transforms import Padding, padding_fixation
 
 path2dhf = os.path.join("/home/ec2-user/datasets/DHF1K")
 dataset = DHF1KDataset(

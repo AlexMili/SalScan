@@ -1,15 +1,13 @@
 import os
 
-
+# #### IMPORT DATASETS #####
+from SalScan.Dataset.Video.DHF1K import DHF1KDataset
 from SalScan.Evaluate import VideoSaliencyEvaluation
 
-##### IMPORT DATASETS #####
-from SalScan.Dataset.Video.DHF1K import DHF1KDataset
-
-##### IMPORT MODELS #####
+# #### IMPORT MODELS #####
 from SalScan.Model.Saliency.STSANet import STSANetwork
 
-##### IMPORT TRANFORM #####
+# #### IMPORT TRANFORM #####
 from SalScan.Transforms import Preprocess_STSANet
 
 if __name__ == "__main__":
