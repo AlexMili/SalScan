@@ -3,19 +3,19 @@ Modified Date: 2022/03/08
 Author: Gi-Luen Huang
 mail: come880412@gmail.com
 """
-from collections import OrderedDict
-from itertools import product
 import math
 import os
 import pprint
+from collections import OrderedDict
+from itertools import product
 from typing import List
 
 import numpy as np
 import torch
-from torch.distributions.bernoulli import Bernoulli
 import torch.nn as nn
-from torch.nn import init
 import torch.nn.functional as F
+from torch.distributions.bernoulli import Bernoulli
+from torch.nn import init
 from torch.nn.parameter import Parameter
 
 from SalScan.Model.AbstractModel import AbstractModel

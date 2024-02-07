@@ -1,8 +1,9 @@
 from abc import abstractmethod
-from .AbstractDataset import AbstractDataset
 from typing import Callable
 
 import numpy as np
+
+from .AbstractDataset import AbstractDataset
 
 
 class VideoAbstractDataset(AbstractDataset):

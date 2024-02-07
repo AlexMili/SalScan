@@ -2,22 +2,23 @@
 
 """Module containing Video Session class."""
 
-from abc import ABC
-from collections import defaultdict
 import csv
 import glob
 import inspect
 import json
 import os
+from abc import ABC
+from collections import defaultdict
 
 import cv2
 import numpy as np
 from tqdm import tqdm
 
-from .ImageSession import AbstractSession
+from SalScan.Metric.Saliency import AUC_JUDD, CC, KLD, NSS, SIM, sAUC
 from SalScan.Model.Saliency.CenterBias import CenterBias
-from SalScan.Metric.Saliency import KLD, CC, SIM, NSS, AUC_JUDD, sAUC
-from SalScan.Utils import normalize, is_json_serializable, get_logger
+from SalScan.Utils import get_logger, is_json_serializable, normalize
+
+from .ImageSession import AbstractSession
 
 logger = get_logger(__name__)
 

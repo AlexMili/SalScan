@@ -3,9 +3,9 @@ import shutil
 
 import pytest
 
-from SalScan.Dataset.Video.DHF1K import DHF1KDataset
 from SalScan.Dataset.Image.CAT2000Dataset import CAT2000Dataset
 from SalScan.Dataset.Image.MIT1003Dataset import MIT1003Dataset
+from SalScan.Dataset.Video.DHF1K import DHF1KDataset
 
 DATASET_PATH = "./datasets"
 

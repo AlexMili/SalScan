@@ -9,9 +9,9 @@ import os
 from typing import Callable, List, Union
 
 import cv2
-from tqdm import tqdm
-import pandas as pd
 import numpy as np
+import pandas as pd
+from tqdm import tqdm
 
 from SalScan.Dataset.VideoAbstractDataset import VideoAbstractDataset
 from SalScan.Utils import get_logger
@@ -220,9 +220,7 @@ class DHF1KDataset(VideoAbstractDataset):
             fixmap_pattern = os.path.join(
                 annotation_path, f"0{filename}", "fixation", "*.png"
             )
-            salmap_pattern = os.path.join(
-                annotation_path, f"0{filename}", "maps", "*.png"
-            )
+            salmap_pattern = os.path.join(annotation_path, f"0{filename}", "maps", "*.png")
             # fixations and stimuli need to be sorted because
             # since their order represent the frames, both
             # are going to be loaded by index

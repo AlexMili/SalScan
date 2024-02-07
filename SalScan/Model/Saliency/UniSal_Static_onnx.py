@@ -1,9 +1,9 @@
 import numpy as np
-
 import onnxruntime as ort
+
 from SalScan.Model.AbstractModel import AbstractModel
-from SalScan.Utils import normalize
 from SalScan.Transforms import Preprocess_UniSal
+from SalScan.Utils import normalize
 
 
 class UniSal_Static_onnx(AbstractModel):

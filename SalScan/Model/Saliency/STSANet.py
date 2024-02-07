@@ -3,12 +3,12 @@ Modified Date: 2022/03/08
 Author: Gi-Luen Huang
 mail: come880412@gmail.com
 """
-from collections import OrderedDict
 import os
+from collections import OrderedDict
 
 import numpy as np
-import torch.nn as nn
 import torch
+import torch.nn as nn
 
 from SalScan.Model.AbstractModel import AbstractModel
 from SalScan.Utils import normalize

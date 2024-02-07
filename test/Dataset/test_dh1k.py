@@ -1,7 +1,8 @@
 import os
+import unittest
+
 import numpy as np
 from tqdm import tqdm
-import unittest
 
 from SalScan.Dataset.Video.DHF1K import DHF1KDataset
 

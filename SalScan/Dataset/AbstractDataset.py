@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
 
 """Module containing Datasets abstract class."""
-from abc import ABC, abstractmethod
-from collections import namedtuple
 import glob
 import os
-from pathlib import Path
 import shutil
 import subprocess
-from typing import Dict, Optional, Tuple, Set
 import zipfile
+from abc import ABC, abstractmethod
+from collections import namedtuple
+from pathlib import Path
+from typing import Dict, Optional, Set, Tuple
 
 import gdown
 import numpy as np

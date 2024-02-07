@@ -4,8 +4,8 @@
 
 from abc import ABC
 
+from SalScan.Metric.Saliency import AUC_JUDD, CC, IG, KLD, NSS, SIM, sAUC
 from SalScan.Model.Saliency.CenterBias import CenterBias
-from SalScan.Metric.Saliency import KLD, CC, SIM, NSS, AUC_JUDD, sAUC, IG
 from SalScan.Session.AbstractSession import AbstractSession
 
 

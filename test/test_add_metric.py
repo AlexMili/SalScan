@@ -1,15 +1,15 @@
-from copy import deepcopy
 import os
-import pytest
 import shutil
+from copy import deepcopy
 
 import pandas as pd
+import pytest
 
 from SalScan.Dataset.Image.MIT1003Dataset import MIT1003Dataset
 from SalScan.Dataset.Video.DHF1K import DHF1KDataset
 from SalScan.Evaluate import ImageSaliencyEvaluation, VideoSaliencyEvaluation
-from SalScan.Model.Saliency.Rare2012 import Rare2012
 from SalScan.Metric.Saliency import AUC_JUDD_fast
+from SalScan.Model.Saliency.Rare2012 import Rare2012
 
 DATASET_FOLDER = os.path.join(os.path.expanduser("~"), "datasets")
 

@@ -2,23 +2,23 @@
 
 """Module containing Session abstract class."""
 
-from abc import ABC
-from collections import defaultdict
-import csv
 import copy
+import csv
 import glob
 import inspect
 import json
 import os
-from tqdm import tqdm
+from abc import ABC
+from collections import defaultdict
 
 import cv2
 import numpy as np
 import pandas as pd
+from tqdm import tqdm
 
 from SalScan.Dataset.AbstractDataset import AbstractDataset
 from SalScan.Model.AbstractModel import AbstractModel
-from SalScan.Utils import normalize, get_logger
+from SalScan.Utils import get_logger, normalize
 
 logger = get_logger(__name__)
 

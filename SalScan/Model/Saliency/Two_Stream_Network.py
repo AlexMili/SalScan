@@ -7,19 +7,19 @@ from typing import List
 import cv2
 import numpy as np
 from tensorflow.keras import layers
-from tensorflow.keras.models import Model
+from tensorflow.keras.applications.vgg16 import VGG16
+from tensorflow.keras.initializers import Constant
 from tensorflow.keras.layers import (
-    Input,
     Conv2D,
     Conv3D,
+    Input,
     TimeDistributed,
     UpSampling2D,
 )
-from tensorflow.keras.initializers import Constant
-from tensorflow.keras.applications.vgg16 import VGG16
+from tensorflow.keras.models import Model
 
-from SalScan.Model.AbstractModel import AbstractModel
 from SalScan.Metric.Saliency import EPSILON
+from SalScan.Model.AbstractModel import AbstractModel
 from SalScan.Utils import get_logger
 
 logger = get_logger(__name__)

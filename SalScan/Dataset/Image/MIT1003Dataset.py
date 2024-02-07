@@ -9,8 +9,8 @@ import os
 import cv2
 import numpy as np
 import pandas as pd
-from PIL import Image
 import scipy.io as sio
+from PIL import Image
 from tqdm import tqdm
 
 from SalScan.Dataset.AbstractDataset import AbstractDataset, check_structure_path

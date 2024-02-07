@@ -7,7 +7,7 @@ from typing import Callable, List
 import numpy as np
 import pandas as pd
 
-from SalScan.Metric.Saliency import AUC_JUDD, AUC_JUDD_fast, SIM, sAUC, NSS, IG, CC, KLD
+from SalScan.Metric.Saliency import AUC_JUDD, CC, IG, KLD, NSS, SIM, AUC_JUDD_fast, sAUC
 from SalScan.Model.Saliency.CenterBias import CenterBias
 from SalScan.Session.Saliency.ImageSession import ImageSaliencySession
 from SalScan.Session.Saliency.VideoSession import VideoSaliencySession
