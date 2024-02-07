@@ -8,14 +8,11 @@ from SalScan.Evaluate import VideoSaliencyEvaluation
 
 # Models
 from SalScan.Model.Saliency.UniSal import UniSal
-
 from SalScan.Transforms import Preprocess_UniSal
 
-
-path2dhf = os.path.join("datasets/DHF1K")
+path2dhf = os.path.join("datasets", "DHF1K")
 
 if __name__ == "__main__":
-    dataset_folder = os.path.join(os.path.expanduser("~"), "datasets")
     dhf1k_kwargs = {
         "root_path": path2dhf,
         "sequence_length": 6,
