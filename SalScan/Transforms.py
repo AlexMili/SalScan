@@ -126,7 +126,8 @@ class Preprocess_STSANet:
         )
 
     def __call__(self, img: np.array) -> np.array:
-        # Transforms image from np to PIL and then back to np to comply with STSANet augmentation
+        # Transforms image from np to PIL and then back to np to comply with
+        # STSANet augmentation
         img = img.astype(np.uint8)
         img = Image.fromarray(img).convert("RGB")
         img = self.transform(img)
@@ -158,7 +159,8 @@ class Preprocess_UniSal:
         self.transform = transforms.Compose(transformations)
 
     def __call__(self, img: np.array) -> np.array:
-        # Transforms image from np to PIL and then back to np to comply with STSANet augmentation
+        # Transforms image from np to PIL and then back to np to comply
+        # with STSANet augmentation
         img = img.astype(np.uint8)
 
         img = self.transform(img)
@@ -168,7 +170,8 @@ class Preprocess_UniSal:
         """_summary_
 
         Args:
-            img_size (Union[List, Tuple]): height and width of a 'common' aspect ratio within your dataset
+            img_size (Union[List, Tuple]): height and width of a 'common' aspect ratio
+                within your dataset
 
         Returns:
             out_size (Tuple): the most idoneus height and width for your dataset

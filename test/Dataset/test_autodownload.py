@@ -12,7 +12,6 @@ DATASET_PATH = "./datasets"
 
 def test_download_MIT():
     path_mit = os.path.join(DATASET_PATH, "MIT1003")
-    print(1)
     if os.path.exists(path_mit):
         shutil.rmtree(path_mit)
     dataset = MIT1003Dataset(path_mit, download=True)

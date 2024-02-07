@@ -20,7 +20,7 @@ def test_populate(dataset):
 def test_get_stimulus(dataset):
     dataset.populate()
 
-    i = dataset.get_stimulus(11)
+    _ = dataset.get_stimulus(11)
 
 
 def test_iter_data(dataset):

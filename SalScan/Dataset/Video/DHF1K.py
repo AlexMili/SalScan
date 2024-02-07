@@ -188,8 +188,8 @@ class DHF1KDataset(VideoAbstractDataset):
         # which is not supported.
         if self.fps % evaluation_fps != 0:
             raise ValueError(
-                f"The dataset default fps is {self.fps}. Please set an evaluation_fps such that "
-                f"{self.fps}/evaluation_fps has no remainder."
+                f"The dataset default fps is {self.fps}. Please set an evaluation_fps "
+                f"such that {self.fps}/evaluation_fps has no remainder."
             )
         # Given the above requirement, frame_skip_interval determines how many frames to
         # skip to achieve the desired evaluation fps. For instance, if the original fps

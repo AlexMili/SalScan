@@ -4,7 +4,6 @@
 import glob
 import os
 import shutil
-import subprocess
 import zipfile
 from abc import ABC, abstractmethod
 from collections import namedtuple
@@ -14,6 +13,7 @@ from typing import Dict, Optional, Set, Tuple
 import gdown
 import numpy as np
 import pandas as pd
+import patoolib
 import requests
 
 from SalScan.Utils import get_logger, has_files
@@ -63,8 +63,8 @@ def check_structure_path(path: str, struct: Dict, pattern: Optional[str] = None)
             ```
 
         path: A string containing the root path to check.
-        pattern: A string regular expression to apply to the current files/subdirectory to check
-            if all files are present.
+        pattern: A string regular expression to apply to the current files/subdirectory
+            to check if all files are present.
 
     Returns:
         True if succeeded, raises an error otherwise.
@@ -230,7 +230,8 @@ class AbstractDataset(ABC):
     def _load_stimulus(self, path: str) -> np.array:
         """Load a stimulus.
 
-        Loads stimulus given its path. This method must be defined in subclass to implement specific behavior.
+        Loads stimulus given its path. This method must be defined in subclass to
+        implement specific behavior.
 
         Args:
             path: Stimulus path.
@@ -243,7 +244,8 @@ class AbstractDataset(ABC):
     def _load_saliencymap(self, path: str) -> np.array:
         """Load a saliency map.
 
-        Loads saliency map given its path. This method must be defined in subclass to implement specific behavior.
+        Loads saliency map given its path. This method must be defined in subclass
+        to implement specific behavior.
 
         Args:
             path: Saliency map path.
@@ -287,7 +289,7 @@ class AbstractDataset(ABC):
             gdown.download_folder(url=url, output=output_dir, quiet=False)
         else:
             path_file = os.path.join(output_dir, local_filename)
-            with requests.get(url, stream=True) as r:
+            with requests.get(url, stream=True, timeout=30) as r:
                 r.raise_for_status()
                 with open(path_file, "wb") as f:
                     shutil.copyfileobj(r.raw, f, length=16 * 1024 * 1024)
@@ -298,7 +300,7 @@ class AbstractDataset(ABC):
             curr_dir = os.getcwd()
             os.chdir(output_dir)
             for rar_file in rar_files:
-                subprocess.run(f"unar {os.path.basename(rar_file)}", shell=True)
+                patoolib.extract_archive(os.path.basename(rar_file), outdir="./")
                 os.remove(rar_file)
             os.chdir(curr_dir)
 

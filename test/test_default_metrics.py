@@ -1,9 +1,4 @@
 import os
-import shutil
-from copy import deepcopy
-
-import pandas as pd
-import pytest
 
 from SalScan.Dataset.Image.MIT1003Dataset import MIT1003Dataset
 from SalScan.Metric.Saliency import AUC_JUDD, CC, IG, KLD, NSS, SIM, sAUC

@@ -1,6 +1,5 @@
 import os
 import shutil
-from copy import deepcopy
 
 import pandas as pd
 import pytest
@@ -9,7 +8,7 @@ from SalScan.Dataset.Image.MIT1003Dataset import MIT1003Dataset
 from SalScan.Dataset.Video.DHF1K import DHF1KDataset
 from SalScan.Evaluate import ImageSaliencyEvaluation, VideoSaliencyEvaluation
 from SalScan.Metric.Saliency import AUC_JUDD_fast
-from SalScan.Model.Saliency.Rare2012 import Rare2012
+from SalScan.Model.Saliency.CenterBias import CenterBias
 
 DATASET_FOLDER = os.path.join(os.path.expanduser("~"), "datasets")
 
@@ -32,7 +31,7 @@ def test_add_metrics_image(temp_dir):
 
     NEW_METRIC_NAME = new_metric.__name__
 
-    model = Rare2012
+    model = CenterBias
     dataset = MIT1003Dataset
     image_dict = {
         "models": [
@@ -63,7 +62,7 @@ def test_add_metrics_image(temp_dir):
         temp_dir, dataset.name.lower(), model.name.lower(), "params_setting_1", "val.csv"
     )
     experiment_results = pd.read_csv(path_exp, usecols=["metric", "dataset"])
-    print(experiment_results)
+    print(experiment_results)  # noqa
     # checking that the new metric has been added to the resulting csv file
     assert NEW_METRIC_NAME in experiment_results.loc[:, "metric"].tolist()
     # since the NEW_METRIC is a copy of AUC_JUDD_fast, we are asserting that
@@ -79,11 +78,11 @@ def test_add_metrics_video(temp_dir):
 
     NEW_METRIC_NAME = new_metric.__name__
 
-    model = Rare2012
+    model = CenterBias
     dataset = DHF1KDataset
     video_list = [
         {
-            "model": Rare2012,
+            "model": CenterBias,
             "params": {
                 "dimension": (200, 200),
             },

@@ -204,7 +204,7 @@ class CAT2000Dataset(AbstractDataset):
             )
 
         # Reset index because all index should be to 0
-        self.stimuli.reset_index(inplace=True, drop=True)
+        self.stimuli = self.stimuli.reset_index(drop=True)
 
     def _load_stimulus(self, path: str) -> np.array:
         """
@@ -271,12 +271,15 @@ class CAT2000Dataset(AbstractDataset):
         download it. Requires 'unar' installed in the system for unarchiving the dataset.
         """
         logger.warning(
-            "\n 🔴 You need to have unar installed in your terminal (https://theunarchiver.com/command-line)"
+            "\n 🔴 You need to have unar installed in your terminal "
+            "(https://theunarchiver.com/command-line)"
         )
         if os.path.isdir(os.path.join(self.root_path, "trainSet")):
             logger.warning(
-                f"\n 🔴 The output directory {self.root_path} is already present on your disk and the dataset won't be downloaded. \n"
-                f"In order to silence this warning message set the {self.name} parameter download=False \n"
+                f"\n 🔴 The output directory {self.root_path} is already present on "
+                "your disk and the dataset won't be downloaded. \n"
+                f"In order to silence this warning message set the {self.name} "
+                "parameter download=False \n"
             )
         else:
             os.makedirs(os.path.join(self.root_path, "trainSet"))

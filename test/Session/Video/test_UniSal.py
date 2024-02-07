@@ -25,8 +25,8 @@ if __name__ == "__main__":
         {
             "model": UniSal,
             "params": {
-                "mobilnet_weights": "unisal/unisal/models/weights/mobilenet_v2.pth.tar",
-                "decoder_weights": "unisal/training_runs/pretrained_unisal/weights_best.pth",
+                "mobilnet_weights": "paths/to/weights/mobilenet_v2.pth.tar",
+                "decoder_weights": "paths/to/weights/weights_best.pth",
                 "sequence_length": 6,
             },
             "dataset": DHF1KDataset(**dhf1k_kwargs),
@@ -34,8 +34,8 @@ if __name__ == "__main__":
         {
             "model": UniSal,
             "params": {
-                "mobilnet_weights": "unisal/unisal/models/weights/mobilenet_v2.pth.tar",
-                "decoder_weights": "unisal/training_runs/pretrained_unisal/weights_best.pth",
+                "mobilnet_weights": "paths/to/weights/mobilenet_v2.pth.tar",
+                "decoder_weights": "paths/to/weights/weights_best.pth",
                 "sequence_length": 24,
             },
             "dataset": DHF1KDataset(**dhf1k_kwargs),

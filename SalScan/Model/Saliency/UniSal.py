@@ -216,10 +216,11 @@ class UNISAL(nn.Module):
         super().__init__()
 
         # Check inputs
-        assert gaussian_init in ("random", "manual")
+        if gaussian_init not in ("random", "manual"):
+            raise ValueError("gaussian_init's value is not recognized")
         # Bypass-RNN requires residual RNN connection
-        if bypass_rnn:
-            assert res_rnn
+        if bypass_rnn is True and res_rnn is False:
+            raise ValueError("bypass_rnn cannot be True and res_rnn False")
 
         # Manual Gaussian initialization generates 16 Gaussians
         if n_gaussians > 0 and gaussian_init == "manual":
@@ -373,7 +374,7 @@ class UNISAL(nn.Module):
             )
 
         if self.verbose > 1:
-            pprint.pprint(self.asdict(), width=1)
+            pprint.pprint(self.asdict(), width=1)  # noqa
 
     @property
     def this_source(self):
@@ -670,7 +671,8 @@ class InvertedResidual(nn.Module):
             def batchnorm(num_features):
                 return nn.BatchNorm2d(num_features, momentum=bn_momentum)
 
-        assert actual_stride in [1, 2]
+        if actual_stride not in [1, 2]:
+            raise ValueError("actual_stride must be 1 or 2")
 
         hidden_dim = round(inp * expand_ratio)
         if expand_ratio == 1:
@@ -819,7 +821,7 @@ class MobileNetV2(nn.Module):
 
     def forward(self, x):
         # x = self.features(x)
-        feat_2x, feat_4x, feat_8x = None, None, None
+        feat_2x, feat_4x = None, None
         for idx, module in enumerate(self.features._modules.values()):
             x = module(x)
             if idx == 7:
@@ -1177,7 +1179,9 @@ class ConvGRU(nn.Module):
         dropout = tuple(dropout)
         drop_prob = tuple(drop_prob)
 
-        assert len(hidden_channels) > 0
+        if len(hidden_channels) < 0:
+            raise ValueError("hidden_channels cannot be negative")
+
         self.input_channels = [input_channels] + hidden_channels
         self.hidden_channels = hidden_channels
         self.num_layers = len(hidden_channels)
@@ -1255,8 +1259,9 @@ class ConvGRU(nn.Module):
     def _extend_for_multilayer(self, param):
         if not isinstance(param, list):
             param = [param] * self.num_layers
-        else:
-            assert len(param) == self.num_layers
+        elif len(param) != self.num_layers:
+            raise ValueError("param and self.num_layers must be equal")
+
         return param
 
 

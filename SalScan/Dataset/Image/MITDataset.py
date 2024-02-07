@@ -24,8 +24,10 @@ class MITDataset(AbstractDataset):
 
     Attributes:
         name: A string indicating the name of the dataset.
-        type: A string indicating the type of the dataset. For saliency evaluation set it to "saliency".
-        ONE_DEGREE: An integer representing the number of pixels contained in one degree of visual angle.
+        type: A string indicating the type of the dataset. For saliency evaluation
+            set it to "saliency".
+        ONE_DEGREE: An integer representing the number of pixels contained in one
+            degree of visual angle.
         SCREEN_SIZE: Screen's size during the experiment used to build the dataset.
     """
 
@@ -61,11 +63,13 @@ class MITDataset(AbstractDataset):
     name = "MIT"
     type = "saliency"
 
-    # In this experiment Screen size is 1280x1024 px (section 2.1 of Reference) and the viewing distance is 75cm.
+    # In this experiment Screen size is 1280x1024 px (section 2.1 of Reference) and
+    # the viewing distance is 75cm.
     # If we take screen dimensions which are 19 inch, we obtain 48x48cm.
     # Which corresponds to 34px for 1 degree of visual angle
     # Reference:
-    # Tilke Judd, Krista Ehinger, Fredo Durand, Antonio Torralba. Learning to Predict where Humans Look [ICCV 2009]
+    # Tilke Judd, Krista Ehinger, Fredo Durand, Antonio Torralba. Learning to Predict
+    # where Humans Look [ICCV 2009]
     ONE_DEGREE = 34
 
     SCREEN_SIZE = (1024, 768)

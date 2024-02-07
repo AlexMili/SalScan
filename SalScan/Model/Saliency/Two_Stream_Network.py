@@ -70,8 +70,10 @@ class Two_Stream_Network(AbstractModel):
                 is False
             ):
                 raise FileNotFoundError(
-                    f"\n ❌ {filename} not present inside {os.path.join('SalScan', 'Model', 'Weights')}. You have to download the two "
-                    "models \nfrom https://github.com/zhangkao/IIP_TwoS_Saliency#pre-trained-models and insert them inside the folder."
+                    f"\n ❌ {filename} not present inside "
+                    f"{os.path.join('SalScan', 'Model', 'Weights')}. You have to download "
+                    "the two models \nfrom "
+                    "https://github.com/zhangkao/IIP_TwoS_Saliency#pre-trained-models and insert them inside the folder."  # noqa
                 )
 
         self._config = {**options}
@@ -187,15 +189,11 @@ class Two_Stream_Network(AbstractModel):
 
         # St-net model
         x_st = TimeDistributed(
-            Conv2D(
-                256, (3, 3), activation="relu", padding="same", name="sal_st_conv2d_1"
-            ),
+            Conv2D(256, (3, 3), activation="relu", padding="same", name="sal_st_conv2d_1"),
             name="sal_st_conv2d_11",
         )(x_sf_st)
         x_st = TimeDistributed(
-            Conv2D(
-                256, (3, 3), activation="relu", padding="same", name="sal_st_conv2d_2"
-            ),
+            Conv2D(256, (3, 3), activation="relu", padding="same", name="sal_st_conv2d_2"),
             name="sal_st_conv2d_22",
         )(x_st)
 
@@ -277,9 +275,7 @@ class Two_Stream_Network(AbstractModel):
             name="sal_fu_conv2d_1",
         )(x_fu)
         x_fu = TimeDistributed(
-            Conv2D(
-                128, (3, 3), activation="relu", padding="same", name="sal_fu_conv2d_2"
-            ),
+            Conv2D(128, (3, 3), activation="relu", padding="same", name="sal_fu_conv2d_2"),
             name="sal_fu_conv2d_2",
         )(x_fu)
         x_fu_out = TimeDistributed(
@@ -303,7 +299,12 @@ class Two_Stream_Network(AbstractModel):
         sal_input = Input(shape=(img_rows, img_cols, img_channels))
         input_shape = (img_rows, img_cols, img_channels)
 
-        # cnn = salcnn_VGG16(include_top=False, weights='imagenet', input_tensor=sal_input, input_shape=input_shape)
+        # cnn = salcnn_VGG16(
+        #     include_top=False,
+        #     weights="imagenet",
+        #     input_tensor=sal_input,
+        #     input_shape=input_shape,
+        # )
         cnn = VGG16(
             include_top=False,
             weights="imagenet",
@@ -316,7 +317,9 @@ class Two_Stream_Network(AbstractModel):
         C4 = cnn.get_layer(name="block4_pool").output
         C5 = cnn.get_layer(name="block5_conv3").output
 
-        # C2_1 = Conv2D(256, (1, 1), activation='relu', padding='same', name='sal_fpn_c2')(C2)
+        # C2_1 = Conv2D(256, (1, 1), activation="relu", padding="same", name="sal_fpn_c2")(
+        #     C2
+        # )
         C3_1 = Conv2D(256, (1, 1), activation="relu", padding="same", name="sal_fpn_c3")(
             C3
         )

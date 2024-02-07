@@ -90,11 +90,13 @@ class MIT1003Dataset(AbstractDataset):
     name = "MIT1003"
     has_label = False
 
-    # In this experiment Screen size is 1280x1024 px (section 2.1 of Reference) and the viewing distance is 75cm.
+    # In this experiment Screen size is 1280x1024 px (section 2.1 of Reference) and
+    # the viewing distance is 75cm.
     # If we take screen dimensions which are 19 inch, we obtain 48x48cm.
     # Which corresponds to 34px for 1 degree of visual angle
     # Reference:
-    # Tilke Judd, Krista Ehinger, Fredo Durand, Antonio Torralba. Learning to Predict where Humans Look [ICCV 2009]
+    # Tilke Judd, Krista Ehinger, Fredo Durand, Antonio Torralba. Learning to Predict
+    # where Humans Look [ICCV 2009]
 
     def __init__(
         self, path: str, download: bool = False, training_path: str = None
@@ -213,7 +215,7 @@ class MIT1003Dataset(AbstractDataset):
             )
 
         # Reset index because all index should be to 0
-        self.stimuli.reset_index(inplace=True, drop=True)
+        self.stimuli = self.stimuli.reset_index(drop=True)
 
     def _load_stimulus(self, path: str) -> np.array:
         """
@@ -286,12 +288,15 @@ class MIT1003Dataset(AbstractDataset):
         download it. Requires 'unar' installed in the system for unarchiving the dataset.
         """
         logger.warning(
-            "\n 🔴 You need to have unar installed in your terminal (https://theunarchiver.com/command-line)"
+            "\n 🔴 You need to have unar installed in your terminal "
+            "(https://theunarchiver.com/command-line)"
         )
         if os.path.isdir(self.root_path):
             logger.warning(
-                f"\n 🔴 The output directory {self.root_path} is already present on your disk and the dataset won't be downloaded. \n"
-                f"In order to silence this warning message set the {self.name} parameter download=False \n"
+                f"\n 🔴 The output directory {self.root_path} is already present on "
+                "your disk and the dataset won't be downloaded. \n"
+                f"In order to silence this warning message set the {self.name} "
+                "parameter download=False \n"
             )
         else:
             os.mkdir(self.root_path)

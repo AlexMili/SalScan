@@ -1,6 +1,5 @@
 import numpy as np
 
-from SalScan.Metric.Saliency import AUC_JUDD
 from SalScan.Utils import normalize
 
 
@@ -8,7 +7,8 @@ from SalScan.Utils import normalize
 def AUC_JUDD_SALIENCE_METRICS(s_map, gt):
     # ground truth is discrete, s_map is continous and normalized
     s_map = normalize_map(s_map)
-    # thresholds are calculated from the salience map, only at places where fixations are present
+    # thresholds are calculated from the salience map, only at places where
+    # fixations are present
     thresholds = []
     for i in range(0, gt.shape[0]):
         for k in range(0, gt.shape[1]):
@@ -37,7 +37,8 @@ def AUC_JUDD_SALIENCE_METRICS(s_map, gt):
         num_overlap = np.where(np.add(temp, gt) == 2)[0].shape[0]
         tp = num_overlap / (num_fixations * 1.0)
 
-        # total number of pixels > threshold - number of pixels that overlap with gt / total number of non fixated pixels
+        # total number of pixels > threshold - number of pixels that overlap with
+        # gt / total number of non fixated pixels
         # this becomes nan when gt is full of fixations..this won't happen
         fp = (np.sum(temp) - num_overlap) / (
             (np.shape(gt)[0] * np.shape(gt)[1]) - num_fixations

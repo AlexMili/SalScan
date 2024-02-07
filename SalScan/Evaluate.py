@@ -7,7 +7,7 @@ from typing import Callable, List
 import numpy as np
 import pandas as pd
 
-from SalScan.Metric.Saliency import AUC_JUDD, CC, IG, KLD, NSS, SIM, AUC_JUDD_fast, sAUC
+from SalScan.Metric.Saliency import AUC_JUDD, CC, IG, KLD, NSS, SIM, sAUC
 from SalScan.Model.Saliency.CenterBias import CenterBias
 from SalScan.Session.Saliency.ImageSession import ImageSaliencySession
 from SalScan.Session.Saliency.VideoSession import VideoSaliencySession
@@ -84,7 +84,7 @@ class ImageSaliencyEvaluation:
         | cat2000  | 2       | unisal_static | {'path_to_weights': 'path/to/weights.pht', 'decoder_weights': 'path/to/custom_weights_2.pth'}  | 0.821         | 0.62 | 0.587 | 0.643| 0.567| 0.721|
         | mit1003  | 1       | unisal_static | {'mobilnet_weights': 'path/to/weights.pht', 'decoder_weights': 'path/to/custom_weights_2.pth'} | 0.842         | 0.622| 0.652 | 1.3  | 0.745| 0.544|
         | mit1003  | 2       | unisal_static | {'mobilnet_weights': 'path/to/weights.pht', 'decoder_weights': 'path/to/custom_weights_1.pth'} | 0.794         | 0.621| 0.689 | 1.21 | 0.733| 0.602|
-    """
+    """  # noqa
 
     available_metrics = {
         "AUC_JUDD": 1,
@@ -260,7 +260,8 @@ class ImageSaliencyEvaluation:
                         evaluation.rename(columns=evaluation.iloc[0])
                         # after renaming the column like the first row
                         # the first row is can be discarded as duplicate
-                        .drop(evaluation.index[0]).reset_index(drop=True)
+                        .drop(evaluation.index[0])
+                        .reset_index(drop=True)
                     )
 
                     evaluation["dataset"] = dataset
@@ -278,20 +279,20 @@ class ImageSaliencyEvaluation:
 
             # making params from unhashable type list to hashable type str
             dataset_ranking["params"] = dataset_ranking["params"].astype(str)
-            dataset_ranking.sort_values(
-                by=metric_names, ascending=metrics_ascending, inplace=True
+            dataset_ranking = dataset_ranking.sort_values(
+                by=metric_names, ascending=metrics_ascending
             )
             dataset_ranking["ranking"] = range(1, len(dataset_ranking) + 1)
 
             overall_ranking = pd.concat([overall_ranking, dataset_ranking])
 
-        overall_ranking.reset_index(drop=True, inplace=True)
+        overall_ranking = overall_ranking.reset_index(drop=True)
 
         overall_ranking[metric_names] = (
             overall_ranking[metric_names].astype(float).round(4)
         )
 
-        overall_ranking.reset_index(drop=True, inplace=True)
+        overall_ranking = overall_ranking.reset_index(drop=True)
 
         logger.info("✅ Stored results in ranking_image.csv")
 
@@ -429,7 +430,7 @@ class VideoSaliencyEvaluation:
         |---------|---------|--------|-----------------------------------------------------------------------------------------------------------------------|---------|------|-------|-------|-------|-------|
         | dhf1k   | 1       | unisal | {'mobilnet_weights': 'path/to/weights.pht', 'decoder_weights': 'path/to/custom_weights_1.pth', 'sequence_length': 6}  | 0.882   | 0.62 | 4.234 | 0.623 | 1.028 | 0.42  |
         | dhf1k   | 2       | unisal | {'mobilnet_weights': 'path/to/weights.pht', 'decoder_weights': 'path/to/custom_weights_1.pth', 'sequence_length': 24} | 0.876   | 0.65 | 3.95  | 0.589 | 1.094 | 0.405 |
-    """
+    """  # noqa
 
     available_metrics = {
         "AUC_JUDD": 1,
@@ -603,7 +604,8 @@ class VideoSaliencyEvaluation:
                     evaluation.rename(columns=evaluation.iloc[0])
                     # after renaming the column like the first row
                     # the first row is can be discarded as duplicate
-                    .drop(evaluation.index[0]).reset_index(drop=True)
+                    .drop(evaluation.index[0])
+                    .reset_index(drop=True)
                 )
 
                 evaluation["dataset"] = dataset
@@ -621,24 +623,24 @@ class VideoSaliencyEvaluation:
 
         # making params from unhashable type list to hashable type str
         dataset_ranking["params"] = dataset_ranking["params"].astype(str)
-        dataset_ranking.sort_values(
-            by=metric_names, ascending=metrics_ascending, inplace=True
+        dataset_ranking = dataset_ranking.sort_values(
+            by=metric_names, ascending=metrics_ascending
         )
         dataset_ranking["ranking"] = range(1, len(dataset_ranking) + 1)
 
         overall_ranking = pd.concat([overall_ranking, dataset_ranking])
 
-        overall_ranking.reset_index(drop=True, inplace=True)
+        overall_ranking = overall_ranking.reset_index(drop=True)
 
         overall_ranking[metric_names] = (
             overall_ranking[metric_names].astype(float).round(4)
         )
 
-        overall_ranking.reset_index(drop=True, inplace=True)
+        overall_ranking = overall_ranking.reset_index(drop=True)
 
-        logger.info(f"✅ Stored results in ranking_video.csv")
+        logger.info("✅ Stored results in ranking_video.csv")
 
-        overall_ranking.to_csv(f"ranking_video.csv", sep=",")
+        overall_ranking.to_csv("ranking_video.csv", sep=",")
 
     def _run_evaluation(self):
         """

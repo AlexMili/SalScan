@@ -33,7 +33,6 @@ options = {
     },
 }
 
-session_rare = VideoSaliencySession(options)
-
 if __name__ == "__main__":
-    session_rare.evaluate()
+    session = VideoSaliencySession(options)
+    session.evaluate()

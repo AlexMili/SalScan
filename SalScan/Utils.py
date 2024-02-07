@@ -1,10 +1,8 @@
 import glob
-import hashlib
 import json
 import logging
 import os
 import re
-import tempfile
 import warnings
 from typing import Any, Optional, Union
 
@@ -167,18 +165,6 @@ def normalize(x, method="standard", axis=None):
             raise ValueError('method not in {"standard", "range", "sum"}')
 
     return res
-
-
-def generate_tmp_filename(filename_ext: str = "jpg", filename_length: int = 10) -> str:
-    tmp_dir = tempfile.gettempdir()
-    tmp_dir = os.path.join(tmp_dir, "salscan_data")
-
-    if not os.path.exists(tmp_dir):
-        os.makedirs(tmp_dir, exist_ok=True)
-
-    filename = hashlib.md5(os.urandom(filename_length)).hexdigest()
-
-    return os.path.join(tmp_dir, f"{filename}.{filename_ext}")
 
 
 def is_json_serializable(variable: Any) -> bool:
