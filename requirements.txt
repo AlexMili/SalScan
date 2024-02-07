@@ -20,3 +20,6 @@ Theano==1.0.5
 torch==2.0.1
 torchvision==0.15.2
 keras==2.12.0
+
+# Code quality
+ruff==0.2.1

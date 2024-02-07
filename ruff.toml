@@ -1,9 +1,9 @@
 # pycodestyle (`E`, `W`), Pyflakes (`F`), Isort (`I`), Bandit (`S`),
 # Pandas (`PD`), Print (`T20`).
-select = ["E", "W", "F", "I", "S", "PD", "T20"]
+lint.select = ["E", "W", "F", "I", "S", "PD", "T20"]
 # PD901: dataframe variable name
 # PD011: use to_numpy() instead of .values
-ignore = ["PD901", "PD011"]
+lint.ignore = ["PD901", "PD011"]
 
 # Exclude a variety of commonly ignored directories.
 exclude = [".venv"]
