@@ -6,8 +6,7 @@ import os
 import re
 import tempfile
 import warnings
-
-from typing import Any, Union
+from typing import Any, Optional, Union
 
 import colorlog
 import cv2
@@ -212,3 +211,32 @@ def gauss2d(img: np.ndarray, sigma: Union[float, int], center: np.ndarray) -> np
     (C, R) = np.meshgrid(b, a)
     mat = gauss_c(C, R, sigma, center)
     return mat
+
+
+def load_video(path: str) -> Optional[cv2.VideoCapture]:
+    if os.path.exists(path) is False:
+        raise FileExistsError(f"'{path}' does not exist")
+
+    video_stream = cv2.VideoCapture(path)
+
+    if video_stream.isOpened() is False:
+        raise ValueError(f"Failed to load video file '{path}'")
+
+    # Read a frame to see if everything is working fine
+    flag, frame = video_stream.read()
+
+    if flag is False or flag is None:
+        raise ValueError("Can't acces frames in video stream")
+
+    if frame is None:
+        raise ValueError("Tested frame is empty")
+
+    # Reset to frame 0
+    video_stream.set(cv2.CAP_PROP_POS_FRAMES, 0)
+
+    return video_stream
+
+
+def release_video(video_stream: Optional[cv2.VideoCapture]) -> None:
+    if video_stream is not None and video_stream.isOpened() is True:
+        video_stream.release()
